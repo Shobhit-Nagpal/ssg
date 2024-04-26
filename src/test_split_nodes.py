@@ -1,5 +1,5 @@
 import unittest
-from split import split_nodes_image, split_nodes_link
+from convert import split_nodes_image, split_nodes_link
 from textnode import TextNode
 
 text_type_text = "text"
