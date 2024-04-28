@@ -2,6 +2,12 @@ import unittest
 from convert import extract_markdown_images, extract_markdown_links
 
 class TestExtractingImagesAndLinks(unittest.TestCase):
+    def test_extract_only_image(self):
+        text = "![image](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/zjjcJKZ.png)"
+        link = ("image", "https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/zjjcJKZ.png")
+        extracted_link = extract_markdown_images(text)
+        self.assertEqual([link], extracted_link)
+
     def test_extract_one_image(self):
         text = "This is text with an ![image](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/zjjcJKZ.png)"
         link = ("image", "https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/zjjcJKZ.png")

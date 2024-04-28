@@ -17,6 +17,7 @@ class TestSplitNodes(unittest.TestCase):
             TextNode("This is text with an ", text_type_text),
             TextNode("image", text_type_image,
                      "https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/zjjcJKZ.png"),
+            TextNode(" ", text_type_text),
         ]
 
         node = TextNode(
@@ -97,6 +98,7 @@ class TestSplitNodes(unittest.TestCase):
             TextNode("This is text with an ", text_type_text),
             TextNode("image", text_type_link,
                      "https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/zjjcJKZ.png"),
+            TextNode(" ", text_type_text),
         ]
 
         node = TextNode(
@@ -165,6 +167,19 @@ class TestSplitNodes(unittest.TestCase):
 
         node = TextNode(
             "This is text with an [link](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/zjjcJKZ.png) and another [second link](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/3elNhQu.png) lmao and a WHOLE ANOTHER [third link](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/3elNhQu.png)",
+            text_type_text,
+        )
+        new_nodes = split_nodes_link([node])
+
+        self.assertEqual(new_nodes, final_nodes)
+
+    def test_only_text(self):
+        final_nodes = [
+            TextNode("This is text with an ", text_type_text),
+        ]
+
+        node = TextNode(
+            "This is text with an ",
             text_type_text,
         )
         new_nodes = split_nodes_link([node])
