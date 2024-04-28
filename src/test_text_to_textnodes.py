@@ -1,5 +1,5 @@
 import unittest
-from convert import text_to_textnodes
+from inline_markdown import text_to_textnodes
 from textnode import TextNode
 
 text_type_text = "text"
