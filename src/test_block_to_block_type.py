@@ -1,6 +1,7 @@
 import unittest
 from block_markdown import block_to_block_type
 
+
 class TestBlockToBlockType(unittest.TestCase):
     def test_heading_1(self):
         text = "# Heading 1"
@@ -17,12 +18,10 @@ class TestBlockToBlockType(unittest.TestCase):
         block_type = block_to_block_type(text)
         self.assertEqual(block_type, "code")
 
-
     def test_quote(self):
         text = ">Quote time\n>cont"
         block_type = block_to_block_type(text)
         self.assertEqual(block_type, "quote")
-
 
     def test_unordered_list(self):
         text = "- Brocolli\n - Tomato"
@@ -30,11 +29,11 @@ class TestBlockToBlockType(unittest.TestCase):
         self.assertEqual(block_type, "unordered_list")
 
     def test_ordered_list(self):
-        text ="1. Brocolli\n 2. Tomato"
+        text = "1. Brocolli\n 2. Tomato"
         block_type = block_to_block_type(text)
         self.assertEqual(block_type, "ordered_list")
 
     def test_paragraph(self):
-        text ="Normal lil sweet sweet paragraph"
+        text = "Normal lil sweet sweet paragraph"
         block_type = block_to_block_type(text)
         self.assertEqual(block_type, "paragraph")
