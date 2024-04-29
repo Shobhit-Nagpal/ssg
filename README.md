@@ -19,3 +19,5 @@ git clone https://github.com/Shobhit-Nagpal/ssg
 ```
 
 You can write content in the content directory under markdown file
+
+Note: Each markdown file should have a main heading at the beginning of the file
