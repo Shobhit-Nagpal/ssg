@@ -2,15 +2,16 @@ import os
 import sys
 import shutil
 from block_markdown import generate_page
+from pathlib import Path
 
 public_path = f"{os.getcwd()}/public/"
 static_path = f"{os.getcwd()}/static/"
-content_path = f"{os.getcwd()}/content/index.md"
+content_path = f"{os.getcwd()}/content/"
 template_path = f"{os.getcwd()}/template.html"
 
 def main():
     copy_contents()
-    generate_page(content_path, template_path, public_path + "index.html")
+    generate_pages_recursive(content_path, template_path, public_path)
 
 def copy_contents():
 
@@ -53,5 +54,23 @@ def copy_dir(src, dest):
             os.mkdir(public_dir)
             copy_dir(dir_path, public_dir)
 
+
+
+def generate_pages_recursive(dir_path_content, template_path, dest_dir_path):
+
+    if not os.path.exists(dir_path_content):
+        raise Exception(f"{dir_path_content} does not exist")
+        sys.exit()
+
+    content_dir_files = os.listdir(dir_path_content)
+
+    for content_dir_file in content_dir_files:
+        if os.path.isfile(dir_path_content + content_dir_file):
+            if Path(content_dir_file).suffix == ".md":
+                html_page_name = os.path.splitext(content_dir_file)[0] + ".html"
+                generate_page(dir_path_content + content_dir_file, template_path, dest_dir_path + html_page_name)
+        else:
+            os.mkdir(os.path.join(dest_dir_path, content_dir_file))
+            generate_pages_recursive(dir_path_content + content_dir_file + "/", template_path, dest_dir_path + content_dir_file + "/")
 
 main()
