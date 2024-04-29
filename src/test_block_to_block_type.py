@@ -14,7 +14,12 @@ class TestBlockToBlockType(unittest.TestCase):
         self.assertEqual(block_type, "heading")
 
     def test_code(self):
-        text = "```This is a nice lil code block```"
+        text = """```
+        print("Lord")
+        print("of")
+        print("the")
+        print("Rings")
+        ```"""
         block_type = block_to_block_type(text)
         self.assertEqual(block_type, "code")
 

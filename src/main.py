@@ -1,12 +1,16 @@
 import os
 import sys
 import shutil
+from block_markdown import generate_page
 
 public_path = f"{os.getcwd()}/public/"
 static_path = f"{os.getcwd()}/static/"
+content_path = f"{os.getcwd()}/content/index.md"
+template_path = f"{os.getcwd()}/template.html"
 
 def main():
     copy_contents()
+    generate_page(content_path, template_path, public_path + "index.html")
 
 def copy_contents():
 
@@ -24,7 +28,7 @@ def copy_contents():
     # Paste from static to public
     if not os.path.exists(static_path):
         raise Exception("static directory does not exist")
-        sys.exit(1)
+        sys.exit()
 
     contents = os.listdir(static_path)
     for content in contents:
@@ -48,5 +52,6 @@ def copy_dir(src, dest):
             public_dir = dest + dir_content + "/"
             os.mkdir(public_dir)
             copy_dir(dir_path, public_dir)
+
 
 main()
